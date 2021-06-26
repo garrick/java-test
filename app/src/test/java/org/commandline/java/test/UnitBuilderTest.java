@@ -1,19 +1,23 @@
 package org.commandline.java.test;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class UnitBuilderTest {
-    @Test
-    public void testWeKnowAboutTinUnitTypes() {
+
+    @ParameterizedTest
+    @ValueSource(strings = {"tin"})
+    public void testWeKnowAboutTinUnitTypeNames(String typeName) {
         //Arrange
         UnitBuilder unit = new UnitBuilder();
         //Act
-        Unit actualUnit = unit.buildUnitByName("tin");
+        Unit actualUnit = unit.buildUnitByName(typeName);
         //Assert
-        assertEquals("tin", actualUnit.displayName());
+        assertEquals(typeName, actualUnit.displayName());
     }
 
     @Test
