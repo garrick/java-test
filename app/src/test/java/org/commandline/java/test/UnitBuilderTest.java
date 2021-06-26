@@ -2,6 +2,7 @@ package org.commandline.java.test;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UnitBuilderTest {
@@ -12,6 +13,6 @@ public class UnitBuilderTest {
         //Act
         Unit actualUnit = unit.buildUnitByName("tin");
         //Assert
-        assertNotNull(actualUnit);
+        assertEquals("tin", actualUnit.displayName());
     }
 }
