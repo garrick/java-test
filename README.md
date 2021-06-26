@@ -6,7 +6,7 @@ This is a simple exercise to allow you to demostrate your software engineering s
   1. Please fork this repository and work on your fork.
      _https://help.github.com/en/articles/fork-a-repo_
   2. Commit changes frequently so that we can review your progression with you later.
-     _https://crealytics.com/blog/5-reasons-keeping-git-commits-small/_
+     _https://crealytics.com/blog/5-reasons-keeping-git-commits-small/_ *NOTE: This link is dead - perhaps a similar/updated one could be used?
   3. You should use a recognised build tool, e.g. _gradle_, _maven_...
   4. We are currently using [open JDK 8u181](https://cdn.azul.com/zulu/bin/zulu8.31.0.1-jdk8.0.181-win_x64.msi). But please use the JDK you think is most appropriate to demonstrate your skillset. 
   5. We don't expect 100% code coverage, we expect well tested code.
