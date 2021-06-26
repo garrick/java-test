@@ -1,13 +1,15 @@
 package org.commandline.java.test;
 
-public class Cost {
-    private int hundredths;
+import java.math.BigDecimal;
 
-    public Cost(int hundredths) {
-        this.hundredths = hundredths;
+public class Cost {
+    private BigDecimal bigDecimalValue;
+
+    public Cost(BigDecimal value) {
+        this.bigDecimalValue = value;
     }
 
     public String displayFormat() {
-        return "0.01";
+        return String.format("%.2f", this.bigDecimalValue);
     }
 }
