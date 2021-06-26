@@ -23,4 +23,12 @@ public class ProductTest {
             Product unit = new Product("");
         });
     }
+
+    @Test
+    public void testProductDisplayNameMustNotBeNull() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Product unit = new Product(null);
+        });
+    }
+
 }
