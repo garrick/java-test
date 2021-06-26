@@ -3,6 +3,7 @@ package org.commandline.java.test;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProductTest {
 
@@ -14,5 +15,12 @@ public class ProductTest {
         String displayName = unit.displayName();
         //Assert
         assertEquals("soup", displayName);
+    }
+
+    @Test
+    public void testProductDisplayNameMustNotBeEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Product unit = new Product("");
+        });
     }
 }
