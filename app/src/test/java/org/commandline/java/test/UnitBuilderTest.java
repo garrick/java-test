@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public class UnitBuilderTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"tin"})
+    @ValueSource(strings = {"tin", "loaf"})
     public void testWeKnowAboutTinUnitTypeNames(String typeName) {
         //Arrange
         UnitBuilder unit = new UnitBuilder();
