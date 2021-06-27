@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 
 public class TenPercentOffApples implements Discountable {
     private final HenrysGrocery henrysGrocery;
@@ -18,7 +17,7 @@ public class TenPercentOffApples implements Discountable {
         if(!isCurrentlyAvailable(basket.shoppingTime())) return DiscountItem.NONE;
         long apples = basket.countProductByName("apples");
         if(apples == 0 ) return DiscountItem.NONE;
-        BigDecimal applePrice = henrysGrocery.getStockItemByName("apples").costAsBigDecimal();
+        BigDecimal applePrice = henrysGrocery.getStockItemByName("apples").cost();
         BigDecimal appleDiscount = applePrice.multiply(BigDecimal.valueOf(0.1));
         return new DiscountItem("10% off them apples",
                 appleDiscount.multiply(BigDecimal.valueOf(apples)).stripTrailingZeros());

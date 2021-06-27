@@ -30,16 +30,16 @@ public class Basket {
         return items.size();
     }
 
-    public Cost totalCost() {
+    public BigDecimal totalCost() {
         var ref = new Object() {
             BigDecimal sum = new BigDecimal("0.00");
         };
-        items.forEach((c) -> ref.sum = c.costAsBigDecimal().add(ref.sum));
+        items.forEach((c) -> ref.sum = c.cost().add(ref.sum));
         var discountRef = new Object() {
             BigDecimal discountSum = new BigDecimal("0.00");
         };
         discountItems.forEach((d) -> discountRef.discountSum = d.discountAmount().add(discountRef.discountSum));
-        return new Cost(ref.sum.subtract(discountRef.discountSum).toString());
+        return ref.sum.subtract(discountRef.discountSum);
     }
 
     public Basket applyDiscount(Discountable discount) {

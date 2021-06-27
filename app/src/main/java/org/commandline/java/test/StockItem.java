@@ -5,9 +5,9 @@ import java.math.BigDecimal;
 public class StockItem {
     private Product product;
     private Unit unit;
-    private Cost cost;
+    private BigDecimal cost;
 
-    public StockItem(Product product, Unit unit, Cost cost) {
+    public StockItem(Product product, Unit unit, BigDecimal cost) {
         if(Unit.UNKNOWN == unit) throw new IllegalArgumentException("Unknown Unit type");
         this.product = product;
         this.unit = unit;
@@ -18,7 +18,7 @@ public class StockItem {
         return this.product.displayName();
     }
 
-    public BigDecimal costAsBigDecimal() {
-        return this.cost.asBigDecimal();
+    public BigDecimal cost() {
+        return this.cost.add(new BigDecimal("0.00"));
     }
 }

@@ -1,8 +1,8 @@
 package org.commandline.java.test;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -24,17 +24,17 @@ public class BasketTest {
     }
 
     @Test
-    public void testBasketCanGiveTotalCostWithoutDiscounts() {
+    public void testBasketCanGivetotalCostWithoutDiscounts() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket(LocalDateTime.now());
         //Act
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
-        Cost expectedCost = new Cost("2.10");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("2.10");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 
     @Test
@@ -66,10 +66,10 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
-        Cost expectedCost = new Cost("3.15");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("3.15");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 
     @Test
@@ -84,10 +84,10 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
-        Cost expectedCost = new Cost("3.55");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("3.55");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 
     @Test
@@ -104,10 +104,10 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
-        Cost expectedCost = new Cost("1.90");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("1.90");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 
     @Test
@@ -124,10 +124,10 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
-        Cost expectedCost = new Cost("1.84");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("1.84");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 
     @Test
@@ -144,9 +144,9 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
         unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
-        Cost expectedCost = new Cost("1.97");
-        Cost actualCost = unit.totalCost();
+        BigDecimal expectedBigDecimal = new BigDecimal("1.97");
+        BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
-        assertEquals(expectedCost, actualCost);
+        assertEquals(expectedBigDecimal, actualBigDecimal);
     }
 }

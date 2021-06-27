@@ -2,6 +2,7 @@ package org.commandline.java.test;
 
 import org.commandline.java.test.exceptions.InvalidInventoryItem;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
 public class HenrysGrocery {
@@ -26,6 +27,6 @@ public class HenrysGrocery {
     private StockItem buildStockItem(String productName, String unitName, String price) {
         return new StockItem(new Product(productName),
                 unitBuilder.buildUnitByName(unitName),
-                new Cost(price));
+                new BigDecimal(price));
     }
 }

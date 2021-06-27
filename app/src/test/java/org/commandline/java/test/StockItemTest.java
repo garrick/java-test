@@ -2,6 +2,8 @@ package org.commandline.java.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StockItemTest {
@@ -12,7 +14,7 @@ public class StockItemTest {
         UnitBuilder defaultUnitBuilder = new UnitBuilder();
         StockItem unit = new StockItem(new Product("Slurm"),
                 defaultUnitBuilder.buildUnitByName("bottle"),
-                new Cost("1.99"));
+                new BigDecimal("1.99"));
         //Act //Assert
         assertNotNull(unit);
     }
@@ -25,7 +27,7 @@ public class StockItemTest {
         assertThrows(IllegalArgumentException.class, () -> {
             StockItem unit = new StockItem(new Product("Slurm"),
                     defaultUnitBuilder.buildUnitByName("hogshead"),
-                    new Cost("21.99"));
+                    new BigDecimal("21.99"));
         });
     }
 }
