@@ -49,7 +49,7 @@ public class TwoSoupGetsHalfPriceBreadDiscountTest {
     }
 
     @Test
-    public void testIsCurrentlyAvailableIsTrue() {
+    public void testIsCurrentlyAvailableIsTrueForToday() {
         //Arrange
         LocalDateTime now = LocalDateTime.now();
         //Act

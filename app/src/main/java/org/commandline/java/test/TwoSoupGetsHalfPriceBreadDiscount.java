@@ -23,6 +23,8 @@ public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
 
     @Override
     public boolean isCurrentlyAvailable(LocalDateTime localDateTime) {
-        return true;
+        LocalDateTime validFrom = LocalDateTime.now().minusDays(1);
+        LocalDateTime validThrough = validFrom.plusDays(7);
+        return localDateTime.isAfter(validFrom) && localDateTime.isBefore(validThrough);
     }
 }
