@@ -49,15 +49,20 @@ public class App {
         basket = new Basket(localDateTime);
         while (!"p".equals(lastItem) && !"x".equals(lastItem)) {
             lastItem = consoleWrapper.readLine("Select: [type number to add,'-number' to remove,'p' to pay, 'x' to exit]");
-            processSelection(lastItem);
+            basket = processSelection(lastItem, basket);
         }
     }
 
-    private void processSelection(String value) {
+    Basket processSelection(String value, Basket basket) {
         if ("x".equals(value)) {
             consoleWrapper.printf("Abandoned basket!");
+            return basket;
         }
-
+        String product = convertSelectionToProduct(value);
+        if(!PRODUCT_UNKNOWN.equals(product)){
+            return basket.add(henrysGrocery.getStockItemByName(product));
+        }
+       return basket;
     }
 
     public void buildInventoryData() {

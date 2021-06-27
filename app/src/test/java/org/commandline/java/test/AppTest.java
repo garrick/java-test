@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -77,5 +79,15 @@ class AppTest {
         String productName = unit.convertSelectionToProduct("THX-1138");
         //Assert
         assertEquals("PRODUCT_UNKNOWN", productName);
+    }
+
+    @Test
+    public void testProcessSelectionAddsToBasketForValidPositiveItemIds(){
+        //Act
+        Basket basket = new Basket(LocalDateTime.now());
+        int initialItemCount = basket.itemCount();
+        basket = unit.processSelection("1", basket);
+        //Assert
+        assertEquals(initialItemCount + 1, basket.itemCount());
     }
 }
