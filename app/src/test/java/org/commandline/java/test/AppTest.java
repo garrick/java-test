@@ -3,12 +3,18 @@
  */
 package org.commandline.java.test;
 
+import org.commandline.java.test.console.FakeConsole;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test
+    public void testWorkflowShowsMenu(){
+        FakeConsole fakeConsole = new FakeConsole();
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        App unit = new App(fakeConsole, henrysGrocery);
+        unit.workflow();
+        assertTrue(fakeConsole.getAllOutputAsString().contains("Welcome to Henry's Grocery!\n"));
     }
 }
