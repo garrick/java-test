@@ -1,15 +1,16 @@
 package org.commandline.java.test.console;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class FakeConsole implements ConsoleWrapper {
-    ArrayList<String> inputStrings = new ArrayList<>();
+    Stack<String> inputStrings = new Stack<>();
     ArrayList<String> outputStrings = new ArrayList<>();
 
     @Override
     public String readLine(String input) {
-        inputStrings.add(input);
-        return input;
+        outputStrings.add(input);
+        return inputStrings.pop();
     }
 
     @Override
@@ -17,13 +18,13 @@ public class FakeConsole implements ConsoleWrapper {
         outputStrings.add(output);
     }
 
-    public ArrayList<String> getInputStrings() {
-        return inputStrings;
-    }
-
     public String getAllOutputAsString() {
         StringBuilder sb = new StringBuilder();
         outputStrings.forEach(s -> sb.append(s));
         return sb.toString();
+    }
+
+    public void pushInputStack(String input) {
+        inputStrings.push(input);
     }
 }

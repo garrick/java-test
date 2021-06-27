@@ -6,6 +6,9 @@ package org.commandline.java.test;
 import org.commandline.java.test.console.ConsoleWrapper;
 import org.commandline.java.test.console.DefaultConsoleWrapper;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class App {
@@ -35,8 +38,23 @@ public class App {
     }
 
     public void workflow() {
+        String dateString = consoleWrapper.readLine("Enter today's date in YYYY-MM-DD format:");
+        String[] dateTimeBits = LocalDateTime.now().toString().split("T");
+        LocalDateTime localDateTime = LocalDateTime.parse(dateString+"T"+dateTimeBits[1]);
+        System.out.println(localDateTime);
         consoleWrapper.printf(getGreeting());
-        String value = consoleWrapper.readLine("Select:");
+        String lastItem = "";
+        Basket basket = new Basket(localDateTime);
+        while(!"p".equals(lastItem) && !"x".equals(lastItem)) {
+            lastItem = consoleWrapper.readLine("Select: [type number to add,'-number' to remove,'p' to pay, 'x' to exit]");
+            processSelection(lastItem);
+        }
+    }
+
+    private void processSelection(String value) {
+        if("x".equals(value)) {
+            consoleWrapper.printf("Abandoned basket!");
+        }
     }
 
     public String getInventoryMessage() {

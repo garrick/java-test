@@ -11,10 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
     @Test
-    public void testWorkflowShowsMenu(){
+    public void testWorkflowShowsMenuAndPromptsForDate(){
         FakeConsole fakeConsole = new FakeConsole();
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         App unit = new App(fakeConsole, henrysGrocery);
+        //It's working backwards, to set up but a stack
+        //seemed like a very easy way to fake user sequential input. --GW
+        fakeConsole.pushInputStack("x");  //Leave w/o buying anything
+        fakeConsole.pushInputStack("2021-06-26"); //Enter the date
         unit.workflow();
         assertTrue(fakeConsole.getAllOutputAsString().contains("Welcome to Henry's Grocery!\n"));
     }
