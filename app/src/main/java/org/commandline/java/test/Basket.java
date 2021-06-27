@@ -6,12 +6,12 @@ import java.util.ArrayList;
 
 public class Basket {
 
-    private ArrayList<StockItem> items;
-    private ArrayList<DiscountItem> discountItems;
-    private LocalDateTime shoppingTime;
+    private final ArrayList<StockItem> items;
+    private final ArrayList<DiscountItem> discountItems;
+    private final LocalDateTime shoppingTime;
 
     public Basket(LocalDateTime shoppingTime) {
-        this(new ArrayList(), new ArrayList<>(), shoppingTime);
+        this(new ArrayList<StockItem>(), new ArrayList<DiscountItem>(), shoppingTime);
     }
 
     private Basket(ArrayList<StockItem> items, ArrayList<DiscountItem> discountItems, LocalDateTime shoppingTime) {
@@ -50,10 +50,6 @@ public class Basket {
             return new Basket(items, ourDiscountItems, shoppingTime);
         }
         return new Basket(items, discountItems, shoppingTime);
-    }
-
-    public int discountsCount() {
-        return discountItems.size();
     }
 
     public long countProductByName(String productName) {
