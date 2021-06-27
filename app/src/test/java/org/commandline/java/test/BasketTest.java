@@ -2,6 +2,9 @@ package org.commandline.java.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BasketTest {
@@ -30,5 +33,21 @@ public class BasketTest {
         Cost actualCost = unit.totalCost();
         //Assert
         assertEquals(expectedCost, actualCost);
+    }
+
+    @Test
+    public void testCountProductByNameHasTwoOfEachProduct() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        List<String> validProductNames = Arrays.asList("soup", "soup", "soup", "bread", "bread", "milk");
+        Basket unit = new Basket();
+        for (String productName: validProductNames) {
+            unit = unit.add(henrysGrocery.getStockItemByName(productName));
+        }
+        //Act & Assert
+        assertEquals(3, unit.countProductByName("soup"));
+        assertEquals(2, unit.countProductByName("bread"));
+        assertEquals(1, unit.countProductByName("milk"));
+        assertEquals(0, unit.countProductByName("apples"));
     }
 }

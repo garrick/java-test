@@ -39,4 +39,8 @@ public class Basket {
     public int discountsCount() {
         return 0;
     }
+
+    public long countProductByName(String productName) {
+        return items.stream().filter(p -> productName.equals(p.productName())).count();
+    }
 }
