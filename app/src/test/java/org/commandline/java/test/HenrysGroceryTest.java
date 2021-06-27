@@ -1,11 +1,11 @@
 package org.commandline.java.test;
 
+import org.commandline.java.test.exceptions.InvalidInventoryItem;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HenrysGroceryTest {
 
@@ -20,5 +20,15 @@ public class HenrysGroceryTest {
         //Assert
         assertEquals(itemName, stockItem1.productName());
         assertNotSame(stockItem1, stockItem2);
+    }
+
+    @Test
+    public void testGettingStockItemByNameThrowsInvalidArgumentException(){
+        //Arrange
+        HenrysGrocery unit = new HenrysGrocery();
+        //Act && Assert
+        assertThrows(InvalidInventoryItem.class, () -> {
+            unit.getStockItemByName("durian"); //This should not be available ANYWHERE! :)
+        });
     }
 }

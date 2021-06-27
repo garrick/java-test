@@ -1,5 +1,7 @@
 package org.commandline.java.test;
 
+import org.commandline.java.test.exceptions.InvalidInventoryItem;
+
 import java.util.HashMap;
 
 public class HenrysGrocery {
@@ -14,6 +16,7 @@ public class HenrysGrocery {
     }
 
     public StockItem getStockItemByName(String itemName) {
+        if( !inventory.containsKey(itemName)) throw new InvalidInventoryItem();
         InventoryLine inventoryLine = inventory.get(itemName);
         return buildStockItem(inventoryLine.getProductName(),
                 inventoryLine.getUnitType(),
