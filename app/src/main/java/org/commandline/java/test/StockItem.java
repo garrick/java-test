@@ -1,5 +1,7 @@
 package org.commandline.java.test;
 
+import java.math.BigDecimal;
+
 public class StockItem {
     private Product product;
     private Unit unit;
@@ -14,5 +16,9 @@ public class StockItem {
 
     public String productName() {
         return this.product.displayName();
+    }
+
+    public BigDecimal costAsBigDecimal() {
+        return this.cost.asBigDecimal();
     }
 }

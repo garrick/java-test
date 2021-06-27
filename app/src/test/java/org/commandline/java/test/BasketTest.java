@@ -17,4 +17,18 @@ public class BasketTest {
         //Assert
         assertEquals(2, unit.itemCount());
     }
+
+    @Test
+    public void testBasketCanGiveTotalCostWithoutDiscounts() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket();
+        //Act
+        unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit.add(henrysGrocery.getStockItemByName("milk"));
+        Cost expectedCost = new Cost("2.10");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost, actualCost);
+    }
 }
