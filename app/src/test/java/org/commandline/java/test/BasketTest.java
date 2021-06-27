@@ -91,7 +91,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndNinty() {
+    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndNintyToday() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket(LocalDateTime.now());
@@ -111,7 +111,7 @@ public class BasketTest {
     }
 
     @Test
-    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndEightyFour() {
+    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndEightyFourIn5Days() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket(LocalDateTime.now().plusDays(5));
@@ -125,6 +125,26 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
         Cost expectedCost = new Cost("1.84");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+    }
+
+    @Test
+    public void testThreeApplesTwoSoupALoafOfBreadBoughtTodayIsOneAndEightyFourIn5Days() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now().plusDays(5));
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
+        unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
+        Cost expectedCost = new Cost("1.97");
         Cost actualCost = unit.totalCost();
         //Assert
         assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
