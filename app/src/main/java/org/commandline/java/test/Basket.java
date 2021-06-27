@@ -70,4 +70,8 @@ public class Basket {
         if(found != null) ourItems.remove(found);
         return new Basket(ourItems, discountItems, shoppingTime);
     }
+
+    public String describeForShopper() {
+        return "TBD";
+    }
 }

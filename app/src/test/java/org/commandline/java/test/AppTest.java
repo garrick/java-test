@@ -101,6 +101,20 @@ class AppTest {
         basket = unit.processSelection("-1", basket);
         //Assert
         assertEquals(0, basket.itemCount());
+    }
 
+    @Test
+    public void testDumpBasketForDisplayWhateverBasketDescribeForShopperIs(){
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now()){
+            @Override
+            public String describeForShopper() {
+                return "Whatever basket says";
+            }
+        };
+        //Act
+        String basketMessage = unit.basketDescription(basket);
+        //Assert
+        assertEquals("Whatever basket says", basketMessage);
     }
 }

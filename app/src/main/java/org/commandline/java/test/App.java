@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class App {
     private static final String PRODUCT_UNKNOWN = "PRODUCT_UNKNOWN";
+    public static final String SELECT_PROMPT = "Select: [type number to add,'-number' to remove,'b' to show basket, 'p' to pay, 'x' to exit]";
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
     private Basket basket;
@@ -48,7 +49,7 @@ public class App {
         String lastItem = "";
         basket = new Basket(localDateTime);
         while (!"p".equals(lastItem) && !"x".equals(lastItem)) {
-            lastItem = consoleWrapper.readLine("Select: [type number to add,'-number' to remove,'p' to pay, 'x' to exit]");
+            lastItem = consoleWrapper.readLine(SELECT_PROMPT);
             basket = processSelection(lastItem, basket);
         }
     }
@@ -92,4 +93,7 @@ public class App {
         return PRODUCT_UNKNOWN;
     }
 
+    public String basketDescription(Basket basket) {
+        return basket.describeForShopper();
+    }
 }
