@@ -14,4 +14,13 @@ public class CostTest {
         //Assert
         assertEquals("0.01", actualDisplayFormat);
     }
+
+    @Test
+    public void toStringDisplaysNicely(){
+        //Arrange
+        Cost unit = new Cost("0.50");
+        //Act
+        //Assert
+        assertEquals("0.50", unit.toString());
+    }
 }
