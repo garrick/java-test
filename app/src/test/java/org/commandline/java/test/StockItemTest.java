@@ -15,7 +15,7 @@ public class StockItemTest {
         UnitBuilder defaultUnitBuilder = new UnitBuilder();
         StockItem unit = new StockItem(new Product("Slurm"),
                 defaultUnitBuilder.buildUnitByName("bottle"),
-                new Cost(new BigDecimal("1.99")));
+                new Cost("1.99"));
         //Act //Assert
         assertNotNull(unit);
     }
@@ -28,7 +28,7 @@ public class StockItemTest {
         assertThrows(IllegalArgumentException.class, () -> {
             StockItem unit = new StockItem(new Product("Slurm"),
                     defaultUnitBuilder.buildUnitByName("hogshead"),
-                    new Cost(new BigDecimal("21.99")));
+                    new Cost("21.99"));
         });
     }
 }

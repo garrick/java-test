@@ -19,6 +19,6 @@ public class HenrysGrocery {
     private StockItem buildStockItem(String productName, String unitName, String price) {
         return new StockItem(new Product(productName),
                 unitBuilder.buildUnitByName(unitName),
-                new Cost(new BigDecimal(price)));
+                new Cost(price));
     }
 }

@@ -3,13 +3,13 @@ package org.commandline.java.test;
 import java.math.BigDecimal;
 
 public class Cost {
-    private BigDecimal bigDecimalValue;
+    private BigDecimal bigDecimalPrice;
 
-    public Cost(BigDecimal value) {
-        this.bigDecimalValue = value;
+    public Cost(String price) {
+        this.bigDecimalPrice = new BigDecimal(price);
     }
 
     public String displayFormat() {
-        return String.format("%.2f", this.bigDecimalValue);
+        return String.format("%.2f", this.bigDecimalPrice);
     }
 }
