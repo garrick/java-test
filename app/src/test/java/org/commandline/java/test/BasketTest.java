@@ -90,19 +90,18 @@ public class BasketTest {
         assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
     }
 
-    @Disabled("Need TenPercentOffApples Discount")
     @Test
     public void testSixApplesBottleOfMilkBoughtTodayIsOneAndNinty() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket unit = new Basket(LocalDateTime.now().plusDays(3));
+        Basket unit = new Basket(LocalDateTime.now());
         //Act
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
-        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
         Cost expectedCost = new Cost("1.90");
