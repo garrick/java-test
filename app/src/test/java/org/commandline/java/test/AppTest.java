@@ -38,8 +38,9 @@ class AppTest {
     }
 
     @Test
-    public void testRenderInventory() {
+    public void testBuildAndRenderInventory() {
         //Act
+        unit.buildInventoryData();
         String inventoryMessage = unit.getInventoryMessage();
         //Assert
         assertTrue(inventoryMessage.contains("Product"));
@@ -47,12 +48,12 @@ class AppTest {
     }
 
     @Test
-    public void convertSelectionIntOneToStringBread() {
+    public void convertSelectionIntOneToStringSoup() {
         //Act
+        unit.buildInventoryData();
         String productName = unit.convertSelectionToProduct("1");
         //Assert
         assertEquals("soup", productName);
     }
-
 
 }

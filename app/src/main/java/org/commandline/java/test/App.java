@@ -7,11 +7,14 @@ import org.commandline.java.test.console.ConsoleWrapper;
 import org.commandline.java.test.console.DefaultConsoleWrapper;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class App {
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
     private Basket basket;
+    private HashMap<String,String> itemIdToProductHashMap = new HashMap<>();
+    private String inventoryMessage = "";
 
     public App(ConsoleWrapper consoleWrapper, HenrysGrocery henrysGrocery) {
         this.consoleWrapper = consoleWrapper;
@@ -31,6 +34,7 @@ public class App {
     public static void main(String[] args) {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         App app = new App(new DefaultConsoleWrapper(), henrysGrocery);
+        app.buildInventoryData();
         app.workflow();
     }
 
@@ -55,21 +59,27 @@ public class App {
 
     }
 
-    public String getInventoryMessage() {
+    public void buildInventoryData() {
         StringBuilder sb = new StringBuilder();
         String inventoryCSV = henrysGrocery.getInventoryAsCSV();
         String[] lines = inventoryCSV.split("\n");
         sb.append(String.format("\t Item# \t| %-7s \t| %-5s \t| %-5s \n", (Object[]) lines[0].split(",")));
         for (int i = 1; i < lines.length; i++) {
-            sb.append(String.format(" \t" + i + " \t| %-7s \t| %-5s \t| %-5s \n", (Object[]) lines[i].split(",")));
+            Object[] columns = (Object[]) lines[i].split(",");
+            sb.append(String.format(" \t" + i + " \t| %-7s \t| %-5s \t| %-5s \n", columns));
+            itemIdToProductHashMap.put(""+i,""+columns[0]);
         }
-        return sb.toString();
+        inventoryMessage = sb.toString();
+    }
+
+    public String getInventoryMessage() {
+        return inventoryMessage;
     }
 
     public String convertSelectionToProduct(String productNumber) {
         try{
             int converted = Integer.parseInt(productNumber);
-            if(converted == 1) return "soup";
+            return itemIdToProductHashMap.get(productNumber);
         } catch (RuntimeException re){
         }
         return null;
