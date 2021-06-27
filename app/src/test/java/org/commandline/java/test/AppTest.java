@@ -56,4 +56,12 @@ class AppTest {
         assertEquals("soup", productName);
     }
 
+    @Test
+    public void convertSelectionIntNegativeOneToStringSoup() {
+        //Act
+        unit.buildInventoryData();
+        String productName = unit.convertSelectionToProduct("-1");
+        //Assert
+        assertEquals("soup", productName);
+    }
 }
