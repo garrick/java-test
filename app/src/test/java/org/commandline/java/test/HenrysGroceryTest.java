@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class HenrysGroceryTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"soup", "bread"})
+    @ValueSource(strings = {"soup", "bread", "milk"})
     public void testAllAvailableStockItemsByName(String itemName) {
         //Arrange
         HenrysGrocery unit = new HenrysGrocery();
