@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Basket {
 
-    private ArrayList<StockItem> items = new ArrayList<>();
+    private ArrayList<StockItem> items;
 
     public Basket() {
         this(new ArrayList());
@@ -29,5 +29,14 @@ public class Basket {
         };
         items.forEach((c) -> ref.sum = c.costAsBigDecimal().add(ref.sum));
         return new Cost(ref.sum.toString());
+    }
+
+    public Basket applyDiscount(TwoSoupGetsHalfPriceBreadDiscount discount) {
+        DiscountItem discountItem = discount.check(this);
+        return new Basket(items);
+    }
+
+    public int discountsCount() {
+        return 0;
     }
 }
