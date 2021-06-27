@@ -3,6 +3,7 @@ package org.commandline.java.test;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Basket {
 
@@ -58,5 +59,15 @@ public class Basket {
 
     public LocalDateTime shoppingTime() {
         return this.shoppingTime;
+    }
+
+    public Basket remove(StockItem stockItemByName) {
+        ArrayList<StockItem> ourItems = (ArrayList<StockItem>) this.items.clone();
+        Optional<StockItem> first = ourItems.stream()
+                .filter(i -> i.productName().equals(stockItemByName.productName()))
+                .findFirst();
+        StockItem found = first.get();
+        if(found != null) ourItems.remove(found);
+        return new Basket(ourItems, discountItems, shoppingTime);
     }
 }

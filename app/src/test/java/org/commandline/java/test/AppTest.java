@@ -83,11 +83,24 @@ class AppTest {
 
     @Test
     public void testProcessSelectionAddsToBasketForValidPositiveItemIds(){
-        //Act
+        //Arrange
         Basket basket = new Basket(LocalDateTime.now());
         int initialItemCount = basket.itemCount();
+        //Act
         basket = unit.processSelection("1", basket);
         //Assert
         assertEquals(initialItemCount + 1, basket.itemCount());
+    }
+
+    @Test
+    public void testProcessSelecitonRemovesItemFromBasketForValidNegativeIds() {
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now());
+        basket = unit.processSelection("1", basket);
+        //Act
+        basket = unit.processSelection("-1", basket);
+        //Assert
+        assertEquals(0, basket.itemCount());
+
     }
 }

@@ -59,8 +59,9 @@ public class App {
             return basket;
         }
         String product = convertSelectionToProduct(value);
-        if(!PRODUCT_UNKNOWN.equals(product)){
-            return basket.add(henrysGrocery.getStockItemByName(product));
+        if(!PRODUCT_UNKNOWN.equals(product)) {
+            return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
+                    basket.add(henrysGrocery.getStockItemByName(product)));
         }
        return basket;
     }
