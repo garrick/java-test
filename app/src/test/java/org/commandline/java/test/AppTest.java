@@ -23,6 +23,7 @@ class AppTest {
         fakeConsole = new FakeConsole();
         henrysGrocery = new HenrysGrocery();
         unit = new App(fakeConsole, henrysGrocery);
+        unit.buildInventoryData();
     }
 
     @Test
@@ -40,7 +41,6 @@ class AppTest {
     @Test
     public void testBuildAndRenderInventory() {
         //Act
-        unit.buildInventoryData();
         String inventoryMessage = unit.getInventoryMessage();
         //Assert
         assertTrue(inventoryMessage.contains("Product"));
@@ -50,7 +50,6 @@ class AppTest {
     @Test
     public void convertSelectionIntOneToStringSoup() {
         //Act
-        unit.buildInventoryData();
         String productName = unit.convertSelectionToProduct("1");
         //Assert
         assertEquals("soup", productName);
@@ -59,7 +58,6 @@ class AppTest {
     @Test
     public void convertSelectionIntNegativeOneToStringSoup() {
         //Act
-        unit.buildInventoryData();
         String productName = unit.convertSelectionToProduct("-1");
         //Assert
         assertEquals("soup", productName);
@@ -68,7 +66,6 @@ class AppTest {
     @Test
     public void convertSelectionDefaultsLookupToProductUnknown(){
         //Act
-        unit.buildInventoryData();
         String productName = unit.convertSelectionToProduct("1138");
         //Assert
         assertEquals("PRODUCT_UNKNOWN", productName);
@@ -77,7 +74,6 @@ class AppTest {
     @Test
     public void convertSelectionHandlesInvalidIdsWithProductUnknown(){
         //Act
-        unit.buildInventoryData();
         String productName = unit.convertSelectionToProduct("THX-1138");
         //Assert
         assertEquals("PRODUCT_UNKNOWN", productName);
