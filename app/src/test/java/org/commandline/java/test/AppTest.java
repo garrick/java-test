@@ -64,4 +64,13 @@ class AppTest {
         //Assert
         assertEquals("soup", productName);
     }
+
+    @Test
+    public void convertSelectionDefaultsLookupToProductUnknown(){
+        //Act
+        unit.buildInventoryData();
+        String productName = unit.convertSelectionToProduct("1138");
+        //Assert
+        assertEquals("PRODUCT_UNKNOWN", productName);
+    }
 }

@@ -79,7 +79,7 @@ public class App {
     public String convertSelectionToProduct(String productNumber) {
         try{
             int converted = Integer.parseInt(productNumber);
-            return itemIdToProductHashMap.get(""+Math.abs(converted));
+            return itemIdToProductHashMap.getOrDefault(""+Math.abs(converted), "PRODUCT_UNKNOWN");
         } catch (RuntimeException re){
         }
         return null;
