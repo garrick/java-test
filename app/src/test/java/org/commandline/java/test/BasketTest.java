@@ -2,6 +2,7 @@ package org.commandline.java.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class BasketTest {
     public void testBasketCanAddItems() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket unit = new Basket();
+        Basket unit = new Basket(LocalDateTime.now());
         //Act
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
@@ -25,7 +26,7 @@ public class BasketTest {
     public void testBasketCanGiveTotalCostWithoutDiscounts() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket unit = new Basket();
+        Basket unit = new Basket(LocalDateTime.now());
         //Act
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
@@ -40,7 +41,7 @@ public class BasketTest {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         List<String> validProductNames = Arrays.asList("soup", "soup", "soup", "bread", "bread", "milk");
-        Basket unit = new Basket();
+        Basket unit = new Basket(LocalDateTime.now());
         for (String productName: validProductNames) {
             unit = unit.add(henrysGrocery.getStockItemByName(productName));
         }
@@ -56,7 +57,7 @@ public class BasketTest {
     public void testThreeSoupTwoLoavesIsThreeAndFifteen() {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket unit = new Basket();
+        Basket unit = new Basket(LocalDateTime.now());
         //Act
         unit = unit.add(henrysGrocery.getStockItemByName("soup"));
         unit = unit.add(henrysGrocery.getStockItemByName("soup"));

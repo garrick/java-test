@@ -1,18 +1,30 @@
 package org.commandline.java.test;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.logging.Handler;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TwoSoupGetsHalfPriceBreadDiscountTest {
 
+    private TwoSoupGetsHalfPriceBreadDiscount unit;
+    private Basket basket;
+    private HenrysGrocery henrysGrocery;
+
+    @BeforeEach
+    public void setUp() {
+        //Arrange
+        henrysGrocery = new HenrysGrocery();
+        basket = new Basket(LocalDateTime.now());
+        unit = new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery);
+    }
+
     @Test
     public void testDiscountDoesNotApply() {
-        //Arrange
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket basket = new Basket();
         basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         TwoSoupGetsHalfPriceBreadDiscount unit = new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery);
@@ -24,13 +36,9 @@ public class TwoSoupGetsHalfPriceBreadDiscountTest {
 
     @Test
     public void testDiscountApplies() {
-        //Arrange
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        Basket basket = new Basket();
         basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         basket = basket.add(henrysGrocery.getStockItemByName("bread"));
-        TwoSoupGetsHalfPriceBreadDiscount unit = new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery);
         //Act
         DiscountItem discountItem = unit.check(basket);
         //Assert
@@ -38,5 +46,15 @@ public class TwoSoupGetsHalfPriceBreadDiscountTest {
         assertNotSame(DiscountItem.NONE, discountItem);
         assertEquals(expectedDiscount, discountItem.discountAmount());
         assertEquals("Half price bread for two soups", discountItem.description());
+    }
+
+    @Test
+    public void testIsCurrentlyAvailableIsTrue() {
+        //Arrange
+        LocalDateTime now = LocalDateTime.now();
+        //Act
+        boolean isAvailable = unit.isCurrentlyAvailable(now);
+        //Assert
+        assertTrue(isAvailable);
     }
 }

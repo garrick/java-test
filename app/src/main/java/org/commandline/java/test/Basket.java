@@ -1,15 +1,18 @@
 package org.commandline.java.test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Basket {
 
     private ArrayList<StockItem> items;
     private ArrayList<DiscountItem> discountItems;
+    private LocalDateTime shoppingTime;
 
-    public Basket() {
+    public Basket(LocalDateTime shoppingTime) {
         this(new ArrayList(), new ArrayList<>());
+        this.shoppingTime = shoppingTime;
     }
 
     private Basket(ArrayList<StockItem> items, ArrayList<DiscountItem> discountItems) {

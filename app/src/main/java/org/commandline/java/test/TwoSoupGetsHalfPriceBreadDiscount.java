@@ -1,6 +1,7 @@
 package org.commandline.java.test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
 
@@ -18,5 +19,10 @@ public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
                     breadCost.divide(new BigDecimal("2")));
         }
         return DiscountItem.NONE;
+    }
+
+    @Override
+    public boolean isCurrentlyAvailable(LocalDateTime localDateTime) {
+        return true;
     }
 }
