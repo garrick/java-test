@@ -12,8 +12,8 @@ public class BasketTest {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket();
         //Act
-        unit.add(henrysGrocery.getStockItemByName("bread"));
-        unit.add(henrysGrocery.getStockItemByName("milk"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         //Assert
         assertEquals(2, unit.itemCount());
     }
@@ -24,8 +24,8 @@ public class BasketTest {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket();
         //Act
-        unit.add(henrysGrocery.getStockItemByName("bread"));
-        unit.add(henrysGrocery.getStockItemByName("milk"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.add(henrysGrocery.getStockItemByName("milk"));
         Cost expectedCost = new Cost("2.10");
         Cost actualCost = unit.totalCost();
         //Assert
