@@ -70,4 +70,22 @@ public class BasketTest {
         //Assert
         assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
     }
+
+    @Test
+    public void testThreeSoupTwoLoavesIsThreeAndFiftyFiveWithoutDiscountInDateRange() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now().plusDays(7));
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
+        Cost expectedCost = new Cost("3.55");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+    }
 }

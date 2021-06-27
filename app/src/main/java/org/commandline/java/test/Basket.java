@@ -11,19 +11,19 @@ public class Basket {
     private LocalDateTime shoppingTime;
 
     public Basket(LocalDateTime shoppingTime) {
-        this(new ArrayList(), new ArrayList<>());
-        this.shoppingTime = shoppingTime;
+        this(new ArrayList(), new ArrayList<>(), shoppingTime);
     }
 
-    private Basket(ArrayList<StockItem> items, ArrayList<DiscountItem> discountItems) {
+    private Basket(ArrayList<StockItem> items, ArrayList<DiscountItem> discountItems, LocalDateTime shoppingTime) {
         this.items = items;
         this.discountItems = discountItems;
+        this.shoppingTime = shoppingTime;
     }
 
     public Basket add(StockItem stockItem) {
         ArrayList<StockItem> ourItems = (ArrayList<StockItem>) this.items.clone();
         ourItems.add(stockItem);
-        return new Basket(ourItems, discountItems);
+        return new Basket(ourItems, discountItems, shoppingTime);
     }
 
     public int itemCount() {
@@ -47,9 +47,9 @@ public class Basket {
         if(discountItem != DiscountItem.NONE) {
             ArrayList<DiscountItem> ourDiscountItems = (ArrayList<DiscountItem>) this.discountItems.clone();
             ourDiscountItems.add(discountItem);
-            return new Basket(items, ourDiscountItems);
+            return new Basket(items, ourDiscountItems, shoppingTime);
         }
-        return new Basket(items, discountItems);
+        return new Basket(items, discountItems, shoppingTime);
     }
 
     public int discountsCount() {
@@ -58,5 +58,9 @@ public class Basket {
 
     public long countProductByName(String productName) {
         return items.stream().filter(p -> productName.equals(p.productName())).count();
+    }
+
+    public LocalDateTime shoppingTime() {
+        return this.shoppingTime;
     }
 }

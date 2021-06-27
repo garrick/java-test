@@ -12,6 +12,7 @@ public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
     }
 
     public DiscountItem check(Basket basket) {
+        if (!isCurrentlyAvailable(basket.shoppingTime())) return DiscountItem.NONE;
         if(2 <= basket.countProductByName("soup") &&
         1 <= basket.countProductByName("bread")) {
             BigDecimal breadCost = henrysGrocery.getStockItemByName("bread").costAsBigDecimal();
