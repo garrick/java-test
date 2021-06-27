@@ -8,12 +8,17 @@ public class HenrysGrocery {
     private UnitBuilder unitBuilder = new UnitBuilder();
 
     public HenrysGrocery() {
-        inventory.put("soup", new StockItem(new Product("soup"),
-                unitBuilder.buildUnitByName("tin"),
-                new Cost(new BigDecimal("0.65"))));
+        inventory.put("soup", buildStockItem("soup", "tin", "0.65"));
+        inventory.put("bread", buildStockItem("bread", "loaf", "0.80"));
     }
 
     public StockItem getStockItemByName(String itemName) {
         return inventory.get(itemName);
+    }
+
+    private StockItem buildStockItem(String productName, String unitName, String price) {
+        return new StockItem(new Product(productName),
+                unitBuilder.buildUnitByName(unitName),
+                new Cost(new BigDecimal(price)));
     }
 }

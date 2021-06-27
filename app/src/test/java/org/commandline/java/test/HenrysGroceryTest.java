@@ -1,6 +1,5 @@
 package org.commandline.java.test;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -9,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class HenrysGroceryTest {
 
     @ParameterizedTest
-    @ValueSource(strings = {"soup"})
+    @ValueSource(strings = {"soup", "bread"})
     public void testAllAvailableStockItemsByName(String itemName) {
         //Arrange
         HenrysGrocery unit = new HenrysGrocery();
