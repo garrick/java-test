@@ -1,48 +1,54 @@
 package org.commandline.java.test;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.temporal.ChronoUnit;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TenPercentOffApplesTest {
 
+    private HenrysGrocery henrysGrocery;
+    private TenPercentOffApples unit;
+
+    @BeforeEach
+    public void setUp() {
+        //Arrange
+        henrysGrocery = new HenrysGrocery();
+        unit = new TenPercentOffApples(henrysGrocery);
+    }
+
     @Test
     public void testIsCurrentlyAvailableIsTrue() {
-        //Arrange
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        TenPercentOffApples unit = new TenPercentOffApples(henrysGrocery);
         //Act
-        boolean isAvailable = unit.isCurrentlyAvailable(LocalDateTime.now().plusDays(3));
         //Assert
-        assertTrue(isAvailable);
+        assertTrue(unit.isCurrentlyAvailable(LocalDateTime.now().plusDays(3)));
     }
 
     @Test
     public void testIsCurrentlyAvailableIsFalseTooEarly() {
-        //Arrange
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        TenPercentOffApples unit = new TenPercentOffApples(henrysGrocery);
         //Act
-        boolean isAvailable = unit.isCurrentlyAvailable(LocalDateTime.now().plusDays(2));
         //Assert
-        assertFalse(isAvailable);
+        assertFalse(unit.isCurrentlyAvailable(LocalDateTime.now().plusDays(2)));
     }
 
     @Test
     public void testIsCurrentlyAvailableIsFalseTooLate() {
         //Arrange
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        TenPercentOffApples unit = new TenPercentOffApples(henrysGrocery);
-        //Act
         LocalDateTime startOfThisMonth = LocalDateTime.now().minusDays(LocalDateTime.now().getDayOfMonth());
         LocalDateTime endOfFollowingMonthPlusOneDay = startOfThisMonth.plusMonths(2).plusDays(1);
-        boolean isAvailable = unit.isCurrentlyAvailable(endOfFollowingMonthPlusOneDay);
+        //Act
         //Assert
-        assertFalse(isAvailable);
+        assertFalse(unit.isCurrentlyAvailable(endOfFollowingMonthPlusOneDay));
+    }
+
+    @Test
+    public void testCheckForDiscountIsOutOfDateReturnsUnavailable() {
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now());
+        //Act
+        //Assert
+        assertSame(DiscountItem.NONE, unit.check(basket));
     }
 }

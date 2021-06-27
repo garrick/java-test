@@ -14,7 +14,7 @@ public class TenPercentOffApples implements Discountable {
 
     @Override
     public DiscountItem check(Basket basket) {
-        return null;
+        return DiscountItem.NONE;
     }
 
     @Override
