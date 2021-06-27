@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasketTest {
 
@@ -148,5 +149,24 @@ public class BasketTest {
         BigDecimal actualBigDecimal = unit.totalCost();
         //Assert
         assertEquals(expectedBigDecimal, actualBigDecimal);
+    }
+
+    @Test
+    public void testDescribeForShopperGivesContentsOfBasket(){
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now());
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        String basketDescription = unit.describeForShopper();
+        //Assert
+        assertTrue(basketDescription.contains("apples=3"));
+        assertTrue(basketDescription.contains("soup=2"));
+        assertTrue(basketDescription.contains("bread=1"));
     }
 }

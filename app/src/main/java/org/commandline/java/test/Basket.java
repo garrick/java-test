@@ -1,8 +1,10 @@
 package org.commandline.java.test;
 
+import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class Basket {
@@ -72,6 +74,11 @@ public class Basket {
     }
 
     public String describeForShopper() {
-        return "TBD";
+        HashMap<String, Integer> basketHistorgram = new HashMap<>();
+        for(StockItem item : items) {
+            Integer valueOrDefault = basketHistorgram.getOrDefault(item.productName(), 0);
+            basketHistorgram.put(item.productName(), valueOrDefault + 1);
+        }
+        return "Your basket contains: "+basketHistorgram.toString();
     }
 }
