@@ -79,6 +79,6 @@ public class Basket {
             Integer valueOrDefault = basketHistorgram.getOrDefault(item.productName(), 0);
             basketHistorgram.put(item.productName(), valueOrDefault + 1);
         }
-        return "Your basket contains: "+basketHistorgram.toString();
+        return "\nYour basket contains: "+basketHistorgram.toString()+"\n";
     }
 }

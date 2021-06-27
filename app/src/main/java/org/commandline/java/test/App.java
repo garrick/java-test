@@ -59,6 +59,10 @@ public class App {
             consoleWrapper.printf("Abandoned basket!");
             return basket;
         }
+        if ("b".equals(value)) {
+            consoleWrapper.printf(basket.describeForShopper());
+            return basket;
+        }
         String product = convertSelectionToProduct(value);
         if(!PRODUCT_UNKNOWN.equals(product)) {
             return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :

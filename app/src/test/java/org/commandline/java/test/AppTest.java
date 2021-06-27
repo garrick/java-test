@@ -104,6 +104,17 @@ class AppTest {
     }
 
     @Test
+    public void testProcessSelectionShowsBasketWithB() {
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now());
+        //Act
+        basket = unit.processSelection("b", basket);
+        //Assert
+        assertTrue(fakeConsole.getAllOutputAsString().contains("Your basket contains:"));
+
+    }
+
+    @Test
     public void testDumpBasketForDisplayWhateverBasketDescribeForShopperIs(){
         //Arrange
         Basket basket = new Basket(LocalDateTime.now()){
