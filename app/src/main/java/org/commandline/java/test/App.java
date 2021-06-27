@@ -65,4 +65,14 @@ public class App {
         }
         return sb.toString();
     }
+
+    public String convertSelectionToProduct(String productNumber) {
+        try{
+            int converted = Integer.parseInt(productNumber);
+            if(converted == 1) return "soup";
+        } catch (RuntimeException re){
+        }
+        return null;
+    }
+
 }

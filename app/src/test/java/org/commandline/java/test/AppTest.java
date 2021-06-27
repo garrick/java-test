@@ -45,4 +45,14 @@ class AppTest {
         assertTrue(inventoryMessage.contains("Product"));
         assertTrue(inventoryMessage.contains("0.10"));
     }
+
+    @Test
+    public void convertSelectionIntOneToStringBread() {
+        //Act
+        String productName = unit.convertSelectionToProduct("1");
+        //Assert
+        assertEquals("soup", productName);
+    }
+
+
 }
