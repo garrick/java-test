@@ -104,7 +104,7 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("apple"));
         unit = unit.add(henrysGrocery.getStockItemByName("apple"));
         unit = unit.add(henrysGrocery.getStockItemByName("milk"));
-        //unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
+        unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
         Cost expectedCost = new Cost("1.90");
         Cost actualCost = unit.totalCost();
         //Assert

@@ -42,7 +42,7 @@ public class Basket {
         return new Cost(ref.sum.subtract(discountRef.discountSum).toString());
     }
 
-    public Basket applyDiscount(TwoSoupGetsHalfPriceBreadDiscount discount) {
+    public Basket applyDiscount(Discountable discount) {
         DiscountItem discountItem = discount.check(this);
         if(discountItem != DiscountItem.NONE) {
             ArrayList<DiscountItem> ourDiscountItems = (ArrayList<DiscountItem>) this.discountItems.clone();

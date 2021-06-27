@@ -2,6 +2,7 @@ package org.commandline.java.test;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
 
@@ -24,7 +25,7 @@ public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
 
     @Override
     public boolean isCurrentlyAvailable(LocalDateTime localDateTime) {
-        LocalDateTime validFrom = LocalDateTime.now().minusDays(1);
+        LocalDateTime validFrom = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).minusDays(1);
         LocalDateTime validThrough = validFrom.plusDays(7);
         return localDateTime.isAfter(validFrom) && localDateTime.isBefore(validThrough);
     }
