@@ -3,6 +3,7 @@ package org.commandline.java.test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,5 +51,19 @@ public class TenPercentOffApplesTest {
         //Act
         //Assert
         assertSame(DiscountItem.NONE, unit.check(basket));
+    }
+
+    @Test
+    public void testCheckForDiscountIsWithinDateReturnsCorrectDiscountItem() {
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now().plusDays(7));
+        basket = basket.add(henrysGrocery.getStockItemByName("apples"));
+        basket = basket.add(henrysGrocery.getStockItemByName("apples"));
+        basket = basket.add(henrysGrocery.getStockItemByName("apples"));
+        //Act
+        DiscountItem actualDiscountItem  = unit.check(basket);
+        //Assert
+        assertEquals(new BigDecimal("0.03"), actualDiscountItem.discountAmount());
+        assertEquals("10% off them apples", actualDiscountItem.description());
     }
 }

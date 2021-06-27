@@ -1,5 +1,6 @@
 package org.commandline.java.test;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.ChronoUnit;
@@ -14,7 +15,13 @@ public class TenPercentOffApples implements Discountable {
 
     @Override
     public DiscountItem check(Basket basket) {
-        return DiscountItem.NONE;
+        if(!isCurrentlyAvailable(basket.shoppingTime())) return DiscountItem.NONE;
+        long apples = basket.countProductByName("apples");
+        if(apples == 0 ) return DiscountItem.NONE;
+        BigDecimal applePrice = henrysGrocery.getStockItemByName("apples").costAsBigDecimal();
+        BigDecimal appleDiscount = applePrice.multiply(BigDecimal.valueOf(0.1));
+        return new DiscountItem("10% off them apples",
+                appleDiscount.multiply(BigDecimal.valueOf(apples)).stripTrailingZeros());
     }
 
     @Override
