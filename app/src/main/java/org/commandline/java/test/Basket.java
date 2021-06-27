@@ -74,6 +74,7 @@ public class Basket {
     }
 
     public String describeForShopper() {
+        if(items.isEmpty()) return "Your shopping basket is empty.";
         HashMap<String, Integer> basketHistorgram = new HashMap<>();
         for(StockItem item : items) {
             Integer valueOrDefault = basketHistorgram.getOrDefault(item.productName(), 0);

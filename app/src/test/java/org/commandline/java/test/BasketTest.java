@@ -156,17 +156,28 @@ public class BasketTest {
         //Arrange
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         Basket unit = new Basket(LocalDateTime.now());
-        //Act
         unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("apples"));
         unit = unit.add(henrysGrocery.getStockItemByName("soup"));
         unit = unit.add(henrysGrocery.getStockItemByName("soup"));
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        //Act
         String basketDescription = unit.describeForShopper();
         //Assert
         assertTrue(basketDescription.contains("apples=3"));
         assertTrue(basketDescription.contains("soup=2"));
         assertTrue(basketDescription.contains("bread=1"));
+    }
+
+    @Test
+    public void testDescribeNicelyDescribesAnEmptyBasket() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now());
+        //Act
+        String basketDescription = unit.describeForShopper();
+        //Assert
+        assertEquals("Your shopping basket is empty.", basketDescription);
     }
 }
