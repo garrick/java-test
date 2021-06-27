@@ -69,7 +69,7 @@ public class BasketTest {
         Cost expectedCost = new Cost("3.15");
         Cost actualCost = unit.totalCost();
         //Assert
-        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+        assertEquals(expectedCost, actualCost);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class BasketTest {
         Cost expectedCost = new Cost("3.55");
         Cost actualCost = unit.totalCost();
         //Assert
-        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+        assertEquals(expectedCost, actualCost);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class BasketTest {
         Cost expectedCost = new Cost("1.90");
         Cost actualCost = unit.totalCost();
         //Assert
-        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+        assertEquals(expectedCost, actualCost);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class BasketTest {
         Cost expectedCost = new Cost("1.84");
         Cost actualCost = unit.totalCost();
         //Assert
-        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+        assertEquals(expectedCost, actualCost);
     }
 
     @Test
@@ -147,6 +147,6 @@ public class BasketTest {
         Cost expectedCost = new Cost("1.97");
         Cost actualCost = unit.totalCost();
         //Assert
-        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+        assertEquals(expectedCost, actualCost);
     }
 }

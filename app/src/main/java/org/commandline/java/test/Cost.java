@@ -28,7 +28,7 @@ public class Cost {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cost cost = (Cost) o;
-        return Objects.equals(bigDecimalPrice, cost.bigDecimalPrice);
+        return bigDecimalPrice.equals(cost.bigDecimalPrice);
     }
 
     @Override
