@@ -11,8 +11,8 @@ public class TwoSoupGetsHalfPriceBreadDiscount implements Discountable {
     }
 
     public DiscountItem check(Basket basket) {
-        if(2 == basket.countProductByName("soup") &&
-        1 == basket.countProductByName("bread")) {
+        if(2 <= basket.countProductByName("soup") &&
+        1 <= basket.countProductByName("bread")) {
             BigDecimal breadCost = henrysGrocery.getStockItemByName("bread").costAsBigDecimal();
             return new DiscountItem("Half price bread for two soups",
                     breadCost.divide(new BigDecimal("2")));

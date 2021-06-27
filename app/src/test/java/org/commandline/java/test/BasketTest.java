@@ -50,4 +50,23 @@ public class BasketTest {
         assertEquals(1, unit.countProductByName("milk"));
         assertEquals(0, unit.countProductByName("apples"));
     }
+
+    //ALL TESTS DEFINED in README.MD for acceptance
+    @Test
+    public void testThreeSoupTwoLoavesIsThreeAndFifteen() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket();
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("soup"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.add(henrysGrocery.getStockItemByName("bread"));
+        unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
+        Cost expectedCost = new Cost("3.15");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+    }
 }

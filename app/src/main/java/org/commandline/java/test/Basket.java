@@ -32,7 +32,11 @@ public class Basket {
             BigDecimal sum = new BigDecimal("0.00");
         };
         items.forEach((c) -> ref.sum = c.costAsBigDecimal().add(ref.sum));
-        return new Cost(ref.sum.toString());
+        var discountRef = new Object() {
+            BigDecimal discountSum = new BigDecimal("0.00");
+        };
+        discountItems.forEach((d) -> discountRef.discountSum = d.discountAmount().add(discountRef.discountSum));
+        return new Cost(ref.sum.subtract(discountRef.discountSum).toString());
     }
 
     public Basket applyDiscount(TwoSoupGetsHalfPriceBreadDiscount discount) {
