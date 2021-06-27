@@ -31,4 +31,18 @@ public class HenrysGroceryTest {
             unit.getStockItemByName("asparagus"); //This should not be available ANYWHERE! :)
         });
     }
+
+    @Test
+    public void testGetInventoryAsCSV() {
+        //Arrange
+        HenrysGrocery unit = new HenrysGrocery();
+        //Act
+        String inventoryLinesCsv = unit.getInventoryAsCSV();
+        //Assert
+        assertTrue(inventoryLinesCsv.contains("Product,Unit,Cost\n"));
+        assertTrue(inventoryLinesCsv.contains("soup,tin,0.65\n"));
+        assertTrue(inventoryLinesCsv.contains("bread,loaf,0.80\n"));
+        assertTrue(inventoryLinesCsv.contains("milk,bottle,1.30\n"));
+        assertTrue(inventoryLinesCsv.contains("apples,single,0.10\n"));
+    }
 }

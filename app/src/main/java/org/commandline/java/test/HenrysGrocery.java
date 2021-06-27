@@ -29,4 +29,12 @@ public class HenrysGrocery {
                 unitBuilder.buildUnitByName(unitName),
                 new BigDecimal(price));
     }
+
+    public String getInventoryAsCSV() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Product,Unit,Cost\n");
+        inventory.values().forEach(v -> sb.append(String.format("%s,%s,%s\n",
+                v.getProductName(),v.getUnitType(), v.getCost())));
+        return sb.toString();
+    }
 }
