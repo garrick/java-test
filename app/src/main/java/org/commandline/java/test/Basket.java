@@ -6,17 +6,21 @@ import java.util.ArrayList;
 public class Basket {
 
     private ArrayList<StockItem> items;
+    private ArrayList<DiscountItem> discountItems;
 
     public Basket() {
-        this(new ArrayList());
+        this(new ArrayList(), new ArrayList<>());
     }
-    public Basket(ArrayList<StockItem> newItems) {
-        this.items = newItems;
+
+    private Basket(ArrayList<StockItem> items, ArrayList<DiscountItem> discountItems) {
+        this.items = items;
+        this.discountItems = discountItems;
     }
+
     public Basket add(StockItem stockItem) {
         ArrayList<StockItem> ourItems = (ArrayList<StockItem>) this.items.clone();
         ourItems.add(stockItem);
-        return new Basket(ourItems);
+        return new Basket(ourItems, discountItems);
     }
 
     public int itemCount() {
@@ -33,11 +37,16 @@ public class Basket {
 
     public Basket applyDiscount(TwoSoupGetsHalfPriceBreadDiscount discount) {
         DiscountItem discountItem = discount.check(this);
-        return new Basket(items);
+        if(discountItem != DiscountItem.NONE) {
+            ArrayList<DiscountItem> ourDiscountItems = (ArrayList<DiscountItem>) this.discountItems.clone();
+            ourDiscountItems.add(discountItem);
+            return new Basket(items, ourDiscountItems);
+        }
+        return new Basket(items, discountItems);
     }
 
     public int discountsCount() {
-        return 0;
+        return discountItems.size();
     }
 
     public long countProductByName(String productName) {
