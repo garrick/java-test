@@ -109,4 +109,24 @@ public class BasketTest {
         //Assert
         assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
     }
+
+    @Test
+    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndEightyFour() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now().plusDays(5));
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apples"));
+        unit = unit.add(henrysGrocery.getStockItemByName("milk"));
+        unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
+        Cost expectedCost = new Cost("1.84");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+    }
 }
