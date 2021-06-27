@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 
 public class App {
+    private static final String PRODUCT_UNKNOWN = "PRODUCT_UNKNOWN";
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
     private Basket basket;
@@ -79,10 +80,10 @@ public class App {
     public String convertSelectionToProduct(String productNumber) {
         try{
             int converted = Integer.parseInt(productNumber);
-            return itemIdToProductHashMap.getOrDefault(""+Math.abs(converted), "PRODUCT_UNKNOWN");
+            return itemIdToProductHashMap.getOrDefault(""+Math.abs(converted), PRODUCT_UNKNOWN);
         } catch (RuntimeException re){
         }
-        return null;
+        return PRODUCT_UNKNOWN;
     }
 
 }

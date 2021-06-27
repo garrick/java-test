@@ -73,4 +73,13 @@ class AppTest {
         //Assert
         assertEquals("PRODUCT_UNKNOWN", productName);
     }
+
+    @Test
+    public void convertSelectionHandlesInvalidIdsWithProductUnknown(){
+        //Act
+        unit.buildInventoryData();
+        String productName = unit.convertSelectionToProduct("THX-1138");
+        //Assert
+        assertEquals("PRODUCT_UNKNOWN", productName);
+    }
 }
