@@ -6,6 +6,8 @@ package org.commandline.java.test;
 import org.commandline.java.test.console.ConsoleWrapper;
 import org.commandline.java.test.console.DefaultConsoleWrapper;
 
+import java.util.ArrayList;
+
 public class App {
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
@@ -20,10 +22,11 @@ public class App {
         sb.append("Welcome to Henry's Grocery!\n");
         sb.append("===========================\n");
         sb.append("We sell all four items!\n");
-        sb.append("Item# | Product | Unit | Cost |\n");
-
+        sb.append(getInventoryMessage());
         return sb.toString();
     }
+
+
 
     public static void main(String[] args) {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
@@ -36,4 +39,14 @@ public class App {
         String value = consoleWrapper.readLine("Select:");
     }
 
+    public String getInventoryMessage() {
+       StringBuilder sb = new StringBuilder();
+       String inventoryCSV = henrysGrocery.getInventoryAsCSV();
+        String[] lines = inventoryCSV.split("\n");
+        sb.append(String.format("\t Item# \t| %-7s \t| %-5s \t| %-5s \n", (Object[])lines[0].split(",")));
+        for(int i=1; i < lines.length; i++) {
+            sb.append(String.format(" \t"+i+" \t| %-7s \t| %-5s \t| %-5s \n", (Object[])lines[i].split(",")));
+        }
+        return sb.toString();
+    }
 }

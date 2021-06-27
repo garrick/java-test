@@ -6,6 +6,7 @@ package org.commandline.java.test;
 import org.commandline.java.test.console.FakeConsole;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
@@ -16,5 +17,16 @@ class AppTest {
         App unit = new App(fakeConsole, henrysGrocery);
         unit.workflow();
         assertTrue(fakeConsole.getAllOutputAsString().contains("Welcome to Henry's Grocery!\n"));
+    }
+
+    @Test
+    public void testRenderInventory() {
+
+        FakeConsole fakeConsole = new FakeConsole();
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        App unit = new App(fakeConsole, henrysGrocery);
+        String inventoryMessage = unit.getInventoryMessage();
+        assertTrue(inventoryMessage.contains("Product"));
+        assertTrue(inventoryMessage.contains("0.10"));
     }
 }
