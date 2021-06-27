@@ -28,7 +28,7 @@ public class HenrysGroceryTest {
         HenrysGrocery unit = new HenrysGrocery();
         //Act && Assert
         assertThrows(InvalidInventoryItem.class, () -> {
-            unit.getStockItemByName("durian"); //This should not be available ANYWHERE! :)
+            unit.getStockItemByName("asparagus"); //This should not be available ANYWHERE! :)
         });
     }
 }
