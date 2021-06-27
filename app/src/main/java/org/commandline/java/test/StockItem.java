@@ -11,4 +11,8 @@ public class StockItem {
         this.unit = unit;
         this.cost = cost;
     }
+
+    public String productName() {
+        return this.product.displayName();
+    }
 }
