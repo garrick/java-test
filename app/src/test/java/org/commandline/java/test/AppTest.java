@@ -6,8 +6,6 @@ package org.commandline.java.test;
 import org.commandline.java.test.console.FakeConsole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
 
@@ -107,10 +105,11 @@ class AppTest {
     public void testProcessSelectionShowsBasketWithB() {
         //Arrange
         Basket basket = new Basket(LocalDateTime.now());
+        basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         //Act
         basket = unit.processSelection("b", basket);
         //Assert
-        assertTrue(fakeConsole.getAllOutputAsString().contains("Your basket contains:"));
+        assertTrue(fakeConsole.getAllOutputAsString().contains("Your basket contains"));
 
     }
 
@@ -127,5 +126,22 @@ class AppTest {
         String basketMessage = unit.basketDescription(basket);
         //Assert
         assertEquals("Whatever basket says", basketMessage);
+    }
+
+    @Test
+    public void testProcessSelectionToQuitAppliesDiscountsAndShowsBasketConentsAndTotal(){
+        //Arrange
+        Basket basket = new Basket(LocalDateTime.now()){
+
+        };
+        basket = basket.add(henrysGrocery.getStockItemByName("soup"));
+        basket = basket.add(henrysGrocery.getStockItemByName("soup"));
+        basket = basket.add(henrysGrocery.getStockItemByName("bread"));
+        //Act
+        basket = unit.processSelection("q", basket);
+        //Assert
+        assertEquals(1, basket.discountsAppliedSize());
+        assertTrue(fakeConsole.getAllOutputAsString().contains("Your basket contains: "));
+        assertTrue(fakeConsole.getAllOutputAsString().contains("Your total:"));
     }
 }

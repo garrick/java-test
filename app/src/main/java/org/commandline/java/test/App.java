@@ -68,7 +68,18 @@ public class App {
             return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
                     basket.add(henrysGrocery.getStockItemByName(product)));
         }
+        if("q".equals(value)) {
+            return checkout(basket);
+        }
        return basket;
+    }
+
+    private Basket checkout(Basket basket) {
+        Basket resultBasket = basket.applyDiscount(new TenPercentOffApples(henrysGrocery));
+        resultBasket = resultBasket.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
+        consoleWrapper.printf(resultBasket.describeForShopper());
+        consoleWrapper.printf("Your total: "+ resultBasket.totalCost());
+        return resultBasket;
     }
 
     public void buildInventoryData() {

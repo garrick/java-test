@@ -82,4 +82,8 @@ public class Basket {
         }
         return "\nYour basket contains: "+basketHistorgram.toString()+"\n";
     }
+
+    public int discountsAppliedSize() {
+        return discountItems.size();
+    }
 }
