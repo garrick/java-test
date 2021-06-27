@@ -57,4 +57,14 @@ public class TwoSoupGetsHalfPriceBreadDiscountTest {
         //Assert
         assertTrue(isAvailable);
     }
+    @Test
+    public void testIsCurrentlyAvailableIsFalseAWeekFromToday() {
+        //Arrange
+        LocalDateTime now = LocalDateTime.now().plusDays(7);
+        //Act
+        boolean isAvailable = unit.isCurrentlyAvailable(now);
+        //Assert
+        assertFalse(isAvailable);
+    }
+
 }
