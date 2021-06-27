@@ -1,5 +1,6 @@
 package org.commandline.java.test;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -84,6 +85,27 @@ public class BasketTest {
         unit = unit.add(henrysGrocery.getStockItemByName("bread"));
         unit = unit.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
         Cost expectedCost = new Cost("3.55");
+        Cost actualCost = unit.totalCost();
+        //Assert
+        assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
+    }
+
+    @Disabled("Need TenPercentOffApples Discount")
+    @Test
+    public void testSixApplesBottleOfMilkBoughtTodayIsOneAndNinty() {
+        //Arrange
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        Basket unit = new Basket(LocalDateTime.now().plusDays(3));
+        //Act
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("apple"));
+        unit = unit.add(henrysGrocery.getStockItemByName("milk"));
+        //unit = unit.applyDiscount(new TenPercentOffApples(henrysGrocery));
+        Cost expectedCost = new Cost("1.90");
         Cost actualCost = unit.totalCost();
         //Assert
         assertEquals(expectedCost.asBigDecimal(), actualCost.asBigDecimal());
