@@ -44,7 +44,6 @@ public class App {
         String dateString = consoleWrapper.readLine("Enter today's date in YYYY-MM-DD format:");
         String[] dateTimeBits = LocalDateTime.now().toString().split("T");
         LocalDateTime localDateTime = LocalDateTime.parse(dateString + "T" + dateTimeBits[1]);
-        System.out.println(localDateTime);
         consoleWrapper.printf(getGreeting());
         String lastItem = "";
         basket = new Basket(localDateTime);
@@ -55,6 +54,10 @@ public class App {
     }
 
     Basket processSelection(String value, Basket basket) {
+        //I don't like this.  I'd prefer to put in a chain of command, or
+        //perhaps a better pattern.  But, I've put in a good chunk of time on this now.
+        //I'd most likely ask for some pair review on improving this, but since it's
+        //supposed to be my own work, I'll leve it as is. --GW
         if ("x".equals(value)) {
             consoleWrapper.printf("Abandoned basket!");
             return basket;
@@ -68,7 +71,7 @@ public class App {
             return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
                     basket.add(henrysGrocery.getStockItemByName(product)));
         }
-        if("q".equals(value)) {
+        if("p".equals(value)) {
             return checkout(basket);
         }
        return basket;

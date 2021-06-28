@@ -138,7 +138,7 @@ class AppTest {
         basket = basket.add(henrysGrocery.getStockItemByName("soup"));
         basket = basket.add(henrysGrocery.getStockItemByName("bread"));
         //Act
-        basket = unit.processSelection("q", basket);
+        basket = unit.processSelection("p", basket);
         //Assert
         assertEquals(1, basket.discountsAppliedSize());
         assertTrue(fakeConsole.getAllOutputAsString().contains("Your basket contains: "));
