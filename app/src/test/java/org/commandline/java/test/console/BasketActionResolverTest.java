@@ -7,17 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasketActionResolverTest {
-    @Test
-    public void testResolveForX() {
-        //Arrange
-        FakeConsole console = new FakeConsole();
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
-        //Act
-        BasketAction actionForX = unit.resolveFor("x");
-        //Assert
-        assertTrue(actionForX instanceof BasketActionAbandonCart);
-    }
 
     @Test
     public void testResolveForXReturnsSameObject() {
