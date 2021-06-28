@@ -47,37 +47,7 @@ class AppTest {
         assertTrue(inventoryMessage.contains("0.10"));
     }
 
-    @Test
-    public void convertSelectionIntOneToStringSoup() {
-        //Act
-        String productName = unit.convertSelectionToProduct("1");
-        //Assert
-        assertEquals("soup", productName);
-    }
 
-    @Test
-    public void convertSelectionIntNegativeOneToStringSoup() {
-        //Act
-        String productName = unit.convertSelectionToProduct("-1");
-        //Assert
-        assertEquals("soup", productName);
-    }
-
-    @Test
-    public void convertSelectionDefaultsLookupToProductUnknown(){
-        //Act
-        String productName = unit.convertSelectionToProduct("1138");
-        //Assert
-        assertEquals("PRODUCT_UNKNOWN", productName);
-    }
-
-    @Test
-    public void convertSelectionHandlesInvalidIdsWithProductUnknown(){
-        //Act
-        String productName = unit.convertSelectionToProduct("THX-1138");
-        //Assert
-        assertEquals("PRODUCT_UNKNOWN", productName);
-    }
 
     @Test
     public void testProcessSelectionAddsToBasketForValidPositiveItemIds(){
