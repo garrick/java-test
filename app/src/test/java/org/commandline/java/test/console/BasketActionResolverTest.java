@@ -15,11 +15,11 @@ public class BasketActionResolverTest {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
-        BasketAction firstActionForX = unit.resolveFor("x");
-        BasketAction secondActionForX = unit.resolveFor("x");
+        BasketAction firstAction = unit.resolveFor("x");
+        BasketAction secondAction = unit.resolveFor("x");
         //Assert
-        assertTrue(firstActionForX instanceof BasketActionAbandonCart);
-        assertSame(firstActionForX, secondActionForX );
+        assertTrue(firstAction instanceof BasketActionAbandonCart);
+        assertSame(firstAction, secondAction);
     }
 
     @Test
@@ -29,11 +29,11 @@ public class BasketActionResolverTest {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
-        BasketAction firstActionForX = unit.resolveFor("b");
-        BasketAction secondActionForX = unit.resolveFor("b");
+        BasketAction firstAction = unit.resolveFor("b");
+        BasketAction secondAction = unit.resolveFor("b");
         //Assert
-        assertTrue(firstActionForX instanceof BasketActionShowBasket);
-        assertSame(firstActionForX, secondActionForX );
+        assertTrue(firstAction instanceof BasketActionShowBasket);
+        assertSame(firstAction, secondAction);
     }
 
     @Test
@@ -43,10 +43,10 @@ public class BasketActionResolverTest {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
-        BasketAction firstActionForX = unit.resolveFor("p");
-        BasketAction secondActionForX = unit.resolveFor("p");
+        BasketAction firstAction = unit.resolveFor("p");
+        BasketAction secondAction = unit.resolveFor("p");
         //Assert
-        assertTrue(firstActionForX instanceof BasketActionPay);
-        assertSame(firstActionForX, secondActionForX );
+        assertTrue(firstAction instanceof BasketActionPay);
+        assertSame(firstAction, secondAction);
     }
 }
