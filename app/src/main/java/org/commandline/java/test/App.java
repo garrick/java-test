@@ -3,9 +3,7 @@
  */
 package org.commandline.java.test;
 
-import org.commandline.java.test.console.ConsoleWrapper;
-import org.commandline.java.test.console.DefaultConsoleWrapper;
-import org.commandline.java.test.console.ProductFromItem;
+import org.commandline.java.test.console.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -16,6 +14,7 @@ public class App {
     public static final String SELECT_PROMPT = "Select: [type number to add,'-number' to remove,'b' to show basket, 'p' to pay, 'x' to exit]";
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
+    private final BasketActionResolver basketActionResolver;
     private Basket basket;
     private String inventoryMessage = "";
     private ProductFromItem productFromItem;
@@ -23,6 +22,7 @@ public class App {
     public App(ConsoleWrapper consoleWrapper, HenrysGrocery henrysGrocery) {
         this.consoleWrapper = consoleWrapper;
         this.henrysGrocery = henrysGrocery;
+        this.basketActionResolver = new BasketActionResolver(consoleWrapper, henrysGrocery);
     }
 
     public String getGreeting() {
@@ -61,8 +61,8 @@ public class App {
         //I'd most likely ask for some pair review on improving this, but since it's
         //supposed to be my own work, I'll leve it as is. --GW
         if ("x".equals(value)) {
-            consoleWrapper.printf("Abandoned basket!");
-            return basket;
+           BasketAction basketAction = basketActionResolver.resolveFor(value);
+           return basketAction.processBasket(value, basket);
         }
         if ("b".equals(value)) {
             consoleWrapper.printf(basket.describeForShopper());

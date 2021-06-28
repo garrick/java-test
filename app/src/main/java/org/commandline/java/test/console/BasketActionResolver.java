@@ -12,7 +12,7 @@ public class BasketActionResolver {
     public BasketActionResolver(ConsoleWrapper console, HenrysGrocery henrysGrocery) {
         this.console = console;
         this.henrysGrocery = henrysGrocery;
-        actionRegistry.put("x", new BasketActionAbandonCart());
+        actionRegistry.put("x", new BasketActionAbandonCart(console));
         actionRegistry.put("b", new BasketActionShowBasket());
         actionRegistry.put("p", new BasketActionPay());
     }
