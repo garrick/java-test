@@ -13,6 +13,7 @@ public class BasketActionResolver {
         this.console = console;
         this.henrysGrocery = henrysGrocery;
         actionRegistry.put("x", new BasketActionAbandonCart());
+        actionRegistry.put("b", new BasketActionShowBasket());
     }
 
     public BasketAction resolveFor(String inputValue) {
