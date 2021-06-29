@@ -14,25 +14,13 @@ public class App {
     public static final String SELECT_PROMPT = "Select: [type number to add,'-number' to remove,'b' to show basket, 'p' to pay, 'x' to exit]";
     private final ConsoleWrapper consoleWrapper;
     private final HenrysGrocery henrysGrocery;
-    private BasketActionResolver basketActionResolver;
-    private Basket basket;
-    private String inventoryMessage = "";
+    private final BasketActionResolver basketActionResolver;
 
     public App(ConsoleWrapper consoleWrapper, HenrysGrocery henrysGrocery) {
         this.consoleWrapper = consoleWrapper;
         this.henrysGrocery = henrysGrocery;
         this.basketActionResolver = new BasketActionResolver(consoleWrapper, henrysGrocery);
     }
-
-    public String getGreeting() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Welcome to Henry's Grocery!\n");
-        sb.append("===========================\n");
-        sb.append("We sell all four items!\n");
-        sb.append(getInventoryMessage());
-        return sb.toString();
-    }
-
 
     public static void main(String[] args) {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
@@ -46,7 +34,7 @@ public class App {
         LocalDateTime localDateTime = LocalDateTime.parse(dateString + "T" + dateTimeBits[1]);
         consoleWrapper.printf(getGreeting());
         String lastItem = "";
-        basket = new Basket(localDateTime);
+        Basket basket = new Basket(localDateTime);
         while (!"p".equals(lastItem) && !"x".equals(lastItem)) {
             lastItem = consoleWrapper.readLine(SELECT_PROMPT);
             basket = processSelection(lastItem, basket);
@@ -56,6 +44,15 @@ public class App {
     Basket processSelection(String value, Basket basket) {
         BasketAction basketAction = basketActionResolver.resolveFor(value);
         return basketAction.processBasket(value, basket);
+    }
+
+    private String getGreeting() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Welcome to Henry's Grocery!\n");
+        sb.append("===========================\n");
+        sb.append("We sell all four items!\n");
+        sb.append(getInventoryMessage());
+        return sb.toString();
     }
 
     public String getInventoryMessage() {
