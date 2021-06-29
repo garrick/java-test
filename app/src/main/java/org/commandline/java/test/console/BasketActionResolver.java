@@ -13,7 +13,7 @@ public class BasketActionResolver {
         this.console = console;
         this.henrysGrocery = henrysGrocery;
         actionRegistry.put("x", new BasketActionAbandonCart(console));
-        actionRegistry.put("b", new BasketActionShowBasket());
+        actionRegistry.put("b", new BasketActionShowBasket(console));
         actionRegistry.put("p", new BasketActionPay());
     }
 

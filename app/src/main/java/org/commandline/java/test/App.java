@@ -60,13 +60,9 @@ public class App {
         //perhaps a better pattern.  But, I've put in a good chunk of time on this now.
         //I'd most likely ask for some pair review on improving this, but since it's
         //supposed to be my own work, I'll leve it as is. --GW
-        if ("x".equals(value)) {
+        if ("x".equals(value)|| "b".equals(value)) {
            BasketAction basketAction = basketActionResolver.resolveFor(value);
            return basketAction.processBasket(value, basket);
-        }
-        if ("b".equals(value)) {
-            consoleWrapper.printf(basket.describeForShopper());
-            return basket;
         }
         String product = productFromItem.convertSelectionToProduct(value);
         if(!PRODUCT_UNKNOWN.equals(product)) {
