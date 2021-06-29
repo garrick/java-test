@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class BasketActionResolver {
     private final ConsoleWrapper console;
     private final HenrysGrocery henrysGrocery;
+    private final BasketAction defaultBasketAction;
     private HashMap<String, BasketAction> actionRegistry = new HashMap<>();
 
     public BasketActionResolver(ConsoleWrapper console, HenrysGrocery henrysGrocery) {
@@ -15,9 +16,10 @@ public class BasketActionResolver {
         actionRegistry.put("x", new BasketActionAbandonCart(console));
         actionRegistry.put("b", new BasketActionShowBasket(console));
         actionRegistry.put("p", new BasketActionPay(console, henrysGrocery));
+        this.defaultBasketAction = new BasketActionModifyBasket();
     }
 
     public BasketAction resolveFor(String inputValue) {
-        return actionRegistry.get(inputValue);
+        return actionRegistry.getOrDefault(inputValue, defaultBasketAction);
     }
 }

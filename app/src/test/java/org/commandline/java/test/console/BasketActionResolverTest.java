@@ -49,4 +49,19 @@ public class BasketActionResolverTest {
         assertTrue(firstAction instanceof BasketActionPay);
         assertSame(firstAction, secondAction);
     }
+
+    @Test
+    public void testResolverDefaultsToAttemptItemProcessingReturnsSameObject(){
+        //Arrange
+        FakeConsole console = new FakeConsole();
+        HenrysGrocery henrysGrocery = new HenrysGrocery();
+        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
+        //Act
+        BasketAction firstAction = unit.resolveFor("1");
+        BasketAction secondAction = unit.resolveFor("1");
+        //Assert
+        assertTrue(firstAction instanceof BasketActionModifyBasket);
+        assertSame(firstAction, secondAction);
+
+    }
 }
