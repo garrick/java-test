@@ -62,8 +62,4 @@ public class App {
         return henrysGrocery.getInventoryMessage();
     }
 
-    public String basketDescription(Basket basket) {
-        return basket.describeForShopper();
-    }
-    
 }
