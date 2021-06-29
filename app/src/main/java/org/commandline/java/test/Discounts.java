@@ -26,15 +26,15 @@ public class Discounts {
         return new Discounts((ArrayList<DiscountItem>) this.discountItems.clone());
     }
 
-    public int discountsAppliedSize() {
-        return discountItems.size();
-    }
-
     public BigDecimal totalDiscount() {
         var discountRef = new Object() {
             BigDecimal discountSum = new BigDecimal("0.00");
         };
         discountItems.forEach((d) -> discountRef.discountSum = d.discountAmount().add(discountRef.discountSum));
         return discountRef.discountSum;
+    }
+
+    public ArrayList<DiscountItem> allDiscounts() {
+        return (ArrayList<DiscountItem>) this.discountItems.clone();
     }
 }

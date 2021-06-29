@@ -1,6 +1,5 @@
 package org.commandline.java.test;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,19 +29,10 @@ public class Basket {
         return items.size();
     }
 
-    /*
-    public BigDecimal totalCost() {
-        var ref = new Object() {
-            BigDecimal sum = new BigDecimal("0.00");
-        };
-        items.forEach((c) -> ref.sum = c.cost().add(ref.sum));
-        var discountRef = new Object() {
-            BigDecimal discountSum = new BigDecimal("0.00");
-        };
-        discountItems.forEach((d) -> discountRef.discountSum = d.discountAmount().add(discountRef.discountSum));
-        return ref.sum.subtract(discountRef.discountSum);
+    public ArrayList<StockItem> contents() {
+        return (ArrayList<StockItem>) this.items.clone();
     }
-*/
+
     public long countProductByName(String productName) {
         return items.stream().filter(p -> productName.equals(p.productName())).count();
     }

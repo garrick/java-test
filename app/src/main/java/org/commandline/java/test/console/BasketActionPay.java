@@ -1,7 +1,6 @@
 package org.commandline.java.test.console;
 
-import org.commandline.java.test.Basket;
-import org.commandline.java.test.HenrysGrocery;
+import org.commandline.java.test.*;
 
 public class BasketActionPay extends BasketAction {
     private final ConsoleWrapper consoleWrapper;
@@ -14,10 +13,12 @@ public class BasketActionPay extends BasketAction {
 
     @Override
     public Basket processBasket(String inputValue, Basket resultBasket) {
-        //Basket resultBasket = basket.applyDiscount(new TenPercentOffApples(henrysGrocery));
-        //resultBasket = resultBasket.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
+        PointOfSale pointOfSale = new PointOfSale();
+        Discounts discounts = new Discounts();
+        discounts = discounts.applyDiscount(resultBasket, new TenPercentOffApples(henrysGrocery));
+        discounts = discounts.applyDiscount(resultBasket, new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
         consoleWrapper.printf(resultBasket.describeForShopper());
-        consoleWrapper.printf("Your total: unknown" );//resultBasket.totalCost());
+        consoleWrapper.printf("Your total: " + pointOfSale.totalCost(resultBasket.contents(), discounts));
         return resultBasket;
     }
 }
