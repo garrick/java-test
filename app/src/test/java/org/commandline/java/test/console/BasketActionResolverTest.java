@@ -1,6 +1,7 @@
 package org.commandline.java.test.console;
 
 import org.commandline.java.test.HenrysGrocery;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -8,12 +9,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BasketActionResolverTest {
 
+    private ConsoleWrapper console;
+    private HenrysGrocery henrysGrocery;
+    private BasketActionResolver unit;
+
+    @BeforeEach
+    public void setUp() {
+        //Arrange
+        console = new FakeConsole();
+        henrysGrocery = new HenrysGrocery();
+        unit = new BasketActionResolver(console, henrysGrocery);
+    }
+
     @Test
     public void testResolveForXReturnsSameObject() {
-        //Arrange
-        FakeConsole console = new FakeConsole();
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
         BasketAction firstAction = unit.resolveFor("x");
         BasketAction secondAction = unit.resolveFor("x");
@@ -24,10 +33,6 @@ public class BasketActionResolverTest {
 
     @Test
     public void testResolverForBReturnsSameObject() {
-        //Arrange
-        FakeConsole console = new FakeConsole();
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
         BasketAction firstAction = unit.resolveFor("b");
         BasketAction secondAction = unit.resolveFor("b");
@@ -38,10 +43,6 @@ public class BasketActionResolverTest {
 
     @Test
     public void testResolverForPReturnsSameObject() {
-        //Arrange
-        FakeConsole console = new FakeConsole();
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
         BasketAction firstAction = unit.resolveFor("p");
         BasketAction secondAction = unit.resolveFor("p");
@@ -52,16 +53,11 @@ public class BasketActionResolverTest {
 
     @Test
     public void testResolverDefaultsToAttemptItemProcessingReturnsSameObject(){
-        //Arrange
-        FakeConsole console = new FakeConsole();
-        HenrysGrocery henrysGrocery = new HenrysGrocery();
-        BasketActionResolver unit = new BasketActionResolver(console, henrysGrocery);
         //Act
         BasketAction firstAction = unit.resolveFor("1");
         BasketAction secondAction = unit.resolveFor("1");
         //Assert
         assertTrue(firstAction instanceof BasketActionModifyBasket);
         assertSame(firstAction, secondAction);
-
     }
 }
