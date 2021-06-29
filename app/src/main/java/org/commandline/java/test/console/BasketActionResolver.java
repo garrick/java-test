@@ -10,13 +10,13 @@ public class BasketActionResolver {
     private final BasketAction defaultBasketAction;
     private HashMap<String, BasketAction> actionRegistry = new HashMap<>();
 
-    public BasketActionResolver(ConsoleWrapper console, HenrysGrocery henrysGrocery) {
+    public BasketActionResolver(ConsoleWrapper console, HenrysGrocery henrysGrocery ) {
         this.console = console;
         this.henrysGrocery = henrysGrocery;
         actionRegistry.put("x", new BasketActionAbandonCart(console));
         actionRegistry.put("b", new BasketActionShowBasket(console));
         actionRegistry.put("p", new BasketActionPay(console, henrysGrocery));
-        this.defaultBasketAction = new BasketActionModifyBasket();
+        this.defaultBasketAction = new BasketActionModifyBasket(henrysGrocery );
     }
 
     public BasketAction resolveFor(String inputValue) {

@@ -12,6 +12,7 @@ public class BasketActionResolverTest {
     private ConsoleWrapper console;
     private HenrysGrocery henrysGrocery;
     private BasketActionResolver unit;
+    private ProductFromItem productFromItem;
 
     @BeforeEach
     public void setUp() {
@@ -52,7 +53,7 @@ public class BasketActionResolverTest {
     }
 
     @Test
-    public void testResolverDefaultsToAttemptItemProcessingReturnsSameObject(){
+    public void testResolverDefaultsToAttemptItemProcessingReturnsSameObject() {
         //Act
         BasketAction firstAction = unit.resolveFor("1");
         BasketAction secondAction = unit.resolveFor("1");

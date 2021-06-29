@@ -3,17 +3,18 @@
  */
 package org.commandline.java.test;
 
-import org.commandline.java.test.console.*;
+import org.commandline.java.test.console.BasketAction;
+import org.commandline.java.test.console.BasketActionResolver;
+import org.commandline.java.test.console.ConsoleWrapper;
+import org.commandline.java.test.console.DefaultConsoleWrapper;
 
 import java.time.LocalDateTime;
-
-import static org.commandline.java.test.console.ProductFromItem.PRODUCT_UNKNOWN;
 
 public class App {
     public static final String SELECT_PROMPT = "Select: [type number to add,'-number' to remove,'b' to show basket, 'p' to pay, 'x' to exit]";
     private final ConsoleWrapper consoleWrapper;
-    final HenrysGrocery henrysGrocery;
-    private final BasketActionResolver basketActionResolver;
+    private final HenrysGrocery henrysGrocery;
+    private BasketActionResolver basketActionResolver;
     private Basket basket;
     private String inventoryMessage = "";
 
@@ -53,20 +54,8 @@ public class App {
     }
 
     Basket processSelection(String value, Basket basket) {
-        //I don't like this.  I'd prefer to put in a chain of command, or
-        //perhaps a better pattern.  But, I've put in a good chunk of time on this now.
-        //I'd most likely ask for some pair review on improving this, but since it's
-        //supposed to be my own work, I'll leve it as is. --GW
-        if ("x".equals(value) || "b".equals(value) || "p".equals(value)) {
-           BasketAction basketAction = basketActionResolver.resolveFor(value);
-           return basketAction.processBasket(value, basket);
-        }
-        String product = henrysGrocery.productFromItemConvert(value);
-        if(!PRODUCT_UNKNOWN.equals(product)) {
-            return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
-                    basket.add(henrysGrocery.getStockItemByName(product)));
-        }
-       return basket;
+        BasketAction basketAction = basketActionResolver.resolveFor(value);
+        return basketAction.processBasket(value, basket);
     }
 
     public String getInventoryMessage() {
@@ -76,4 +65,5 @@ public class App {
     public String basketDescription(Basket basket) {
         return basket.describeForShopper();
     }
+    
 }
