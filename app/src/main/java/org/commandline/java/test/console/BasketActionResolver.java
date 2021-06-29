@@ -14,7 +14,7 @@ public class BasketActionResolver {
         this.henrysGrocery = henrysGrocery;
         actionRegistry.put("x", new BasketActionAbandonCart(console));
         actionRegistry.put("b", new BasketActionShowBasket(console));
-        actionRegistry.put("p", new BasketActionPay());
+        actionRegistry.put("p", new BasketActionPay(console, henrysGrocery));
     }
 
     public BasketAction resolveFor(String inputValue) {

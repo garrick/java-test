@@ -60,7 +60,7 @@ public class App {
         //perhaps a better pattern.  But, I've put in a good chunk of time on this now.
         //I'd most likely ask for some pair review on improving this, but since it's
         //supposed to be my own work, I'll leve it as is. --GW
-        if ("x".equals(value)|| "b".equals(value)) {
+        if ("x".equals(value) || "b".equals(value) || "p".equals(value)) {
            BasketAction basketAction = basketActionResolver.resolveFor(value);
            return basketAction.processBasket(value, basket);
         }
@@ -69,18 +69,7 @@ public class App {
             return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
                     basket.add(henrysGrocery.getStockItemByName(product)));
         }
-        if("p".equals(value)) {
-            return checkout(basket);
-        }
        return basket;
-    }
-
-    private Basket checkout(Basket basket) {
-        Basket resultBasket = basket.applyDiscount(new TenPercentOffApples(henrysGrocery));
-        resultBasket = resultBasket.applyDiscount(new TwoSoupGetsHalfPriceBreadDiscount(henrysGrocery));
-        consoleWrapper.printf(resultBasket.describeForShopper());
-        consoleWrapper.printf("Your total: "+ resultBasket.totalCost());
-        return resultBasket;
     }
 
     public void buildInventoryData() {
