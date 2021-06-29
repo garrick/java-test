@@ -23,7 +23,6 @@ class AppTest {
         fakeConsole = new FakeConsole();
         henrysGrocery = new HenrysGrocery();
         unit = new App(fakeConsole, henrysGrocery);
-        unit.buildInventoryData();
     }
 
     @Test

@@ -6,18 +6,16 @@ package org.commandline.java.test;
 import org.commandline.java.test.console.*;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 
 import static org.commandline.java.test.console.ProductFromItem.PRODUCT_UNKNOWN;
 
 public class App {
     public static final String SELECT_PROMPT = "Select: [type number to add,'-number' to remove,'b' to show basket, 'p' to pay, 'x' to exit]";
     private final ConsoleWrapper consoleWrapper;
-    private final HenrysGrocery henrysGrocery;
+    final HenrysGrocery henrysGrocery;
     private final BasketActionResolver basketActionResolver;
     private Basket basket;
     private String inventoryMessage = "";
-    private ProductFromItem productFromItem;
 
     public App(ConsoleWrapper consoleWrapper, HenrysGrocery henrysGrocery) {
         this.consoleWrapper = consoleWrapper;
@@ -38,7 +36,6 @@ public class App {
     public static void main(String[] args) {
         HenrysGrocery henrysGrocery = new HenrysGrocery();
         App app = new App(new DefaultConsoleWrapper(), henrysGrocery);
-        app.buildInventoryData();
         app.workflow();
     }
 
@@ -64,7 +61,7 @@ public class App {
            BasketAction basketAction = basketActionResolver.resolveFor(value);
            return basketAction.processBasket(value, basket);
         }
-        String product = productFromItem.convertSelectionToProduct(value);
+        String product = henrysGrocery.productFromItemConvert(value);
         if(!PRODUCT_UNKNOWN.equals(product)) {
             return (value.startsWith("-") ? basket.remove(henrysGrocery.getStockItemByName(product)) :
                     basket.add(henrysGrocery.getStockItemByName(product)));
@@ -72,23 +69,8 @@ public class App {
        return basket;
     }
 
-    public void buildInventoryData() {
-        StringBuilder sb = new StringBuilder();
-        String inventoryCSV = henrysGrocery.getInventoryAsCSV();
-        HashMap<String,String> itemIdToProductHashMap = new HashMap<>();
-        String[] lines = inventoryCSV.split("\n");
-        sb.append(String.format("\t Item# \t| %-7s \t| %-5s \t| %-5s \n", (Object[]) lines[0].split(",")));
-        for (int i = 1; i < lines.length; i++) {
-            Object[] columns = (Object[]) lines[i].split(",");
-            sb.append(String.format(" \t" + i + " \t| %-7s \t| %-5s \t| %-5s \n", columns));
-            itemIdToProductHashMap.put("" + i, "" + columns[0]);
-        }
-        productFromItem = new ProductFromItem(itemIdToProductHashMap);
-        inventoryMessage = sb.toString();
-    }
-
     public String getInventoryMessage() {
-        return inventoryMessage;
+        return henrysGrocery.getInventoryMessage();
     }
 
     public String basketDescription(Basket basket) {
